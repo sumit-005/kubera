@@ -1,3 +1,5 @@
+"use client";
+
 import { createClient } from "@/utils/supabase/server";
 import { Session } from "@supabase/supabase-js";
 import { useRouter } from "next/navigation";
@@ -25,7 +27,7 @@ const withAuth = <P extends object>(
       };
 
       checkSession();
-    }, []);
+    }, [router, supabase.auth]);
 
     if (!session) {
       return null; // Or a loading spinner
