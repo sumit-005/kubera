@@ -1,7 +1,8 @@
 "use client";
 import React from "react";
-import ThemeProvider from "../components/layout/ThemeToggle/theme-provider";
 import ReactQueryProvider from "./react-query";
+import ThemeProvider from "../components/layout/ThemeToggle/theme-provider";
+
 export default function Providers({ children }: { children: React.ReactNode }) {
   return (
     <>

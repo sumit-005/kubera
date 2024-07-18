@@ -9,7 +9,7 @@ const storage = {
       // console.log('error', e);
     }
   },
-  setItem: (key: string, value: any) => {
+  setItem: (key: string, value: string | object | number | boolean) => {
     try {
       if (value !== null || value !== undefined) {
         localStorage.setItem(`${storagePrefix}${key}`, JSON.stringify(value));

@@ -2,17 +2,13 @@ import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { Progress } from "@/components/ui/progress";
-import { SearchIcon, SlidersHorizontalIcon } from "lucide-react";
+import DashboardHeader from "./components/header";
 
 export default async function Dashboard() {
   return (
     <>
-      <div className="flex justify-between items-center mb-8">
-        <SlidersHorizontalIcon />
-        <h1>Dashboard</h1>
-        <SearchIcon />
-      </div>
-
+      {/* Header */}
+      <DashboardHeader />
       {/* Balance Card */}
       <Card className="my-4 p-4 rounded-2xl bg-muted dark:bg-muted">
         <div className="flex justify-between items-center">
@@ -260,6 +256,8 @@ export default async function Dashboard() {
           </div>
         </div>
       </div>
+
+      {/* Filter Groups */}
     </>
   );
 }

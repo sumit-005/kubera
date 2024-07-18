@@ -6,7 +6,6 @@ import {
   MutationCache,
 } from "@tanstack/react-query";
 import { AxiosError } from "axios";
-import storage from "@/utils/storage";
 import { toast } from "@/components/ui/use-toast";
 
 const queryConfig: DefaultOptions = {
@@ -17,7 +16,7 @@ const queryConfig: DefaultOptions = {
 };
 
 const mutationCache = new MutationCache({
-  onError: (error: any, data: any) => {
+  onError: (error: any) => {
     try {
       if (error.response.status >= 500) {
         if (error?.response?.data?.message) {
@@ -36,7 +35,9 @@ const mutationCache = new MutationCache({
           variant: "destructive",
         });
       }
-    } catch (error) {}
+    } catch (error) {
+      // Do nothing
+    }
   },
 });
 
