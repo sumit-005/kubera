@@ -55,6 +55,9 @@ export function BottomSheet({
           <DrawerTitle>{title}</DrawerTitle>
           {description && <DrawerDescription>{description}</DrawerDescription>}
         </DrawerHeader>
+        <div className="px-4">
+          {children}
+        </div>
       </DrawerContent>
     </Drawer>
   );

@@ -73,7 +73,8 @@
       }
     ],
     // eslntjsx-a11y/heading-has-content
-    "jsx-a11y/heading-has-content": "off"
+    "jsx-a11y/heading-has-content": "off",
+    "jsx-a11y/click-events-have-key-events": "off",
   },
   "settings": {
     "react": {

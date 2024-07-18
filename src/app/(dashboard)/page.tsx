@@ -1,43 +1,116 @@
+'use client';
+import { useRouter } from "next/navigation";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Button } from "@/components/ui/button";
-import { Card } from "@/components/ui/card";
-import { Progress } from "@/components/ui/progress";
+
 import DashboardHeader from "./components/header";
+import ExpenseDetailCard from "@/components/shared/expense-details-card";
 
 export default async function Dashboard() {
+
+  const data = [
+    {
+      id: 1,
+      name: "Munnar Trip 2024",
+      status: "Settled Up",
+      image: "https://picsum.photos/200"
+    },
+    {
+      id: 2,
+      name: "Goa Trip 2024",
+      status: "Settled Up",
+      image: "https://picsum.photos/300"
+    },
+    {
+      id: 3,
+      name: "Sharavati Apartment",
+      status: "you owe ₹500",
+      image: "https://picsum.photos/400"
+    },
+    {
+      id: 4,
+      name: "Munnar Trip 2024",
+      status: "Settled Up",
+      image: "https://picsum.photos/300"
+    },
+    {
+      id: 5,
+      name: "Munnar Trip 2024",
+      status: "you owe ₹300",
+      image: "https://picsum.photos/100"
+    },
+    {
+      id: 6,
+      name: "Munnar Trip 2024",
+      status: "Settled Up",
+      image: "https://picsum.photos/200"
+    },
+    {
+      id: 7,
+      name: "Goa Trip 2024",
+      status: "Settled Up",
+      image: "https://picsum.photos/300"
+    },
+    {
+      id: 8,
+      name: "Sharavati Apartment",
+      status: "you owe ₹500",
+      image: "https://picsum.photos/400"
+    },
+    {
+      id: 9,
+      name: "Munnar Trip 2024",
+      status: "Settled Up",
+      image: "https://picsum.photos/300"
+    },
+    {
+      id: 10,
+      name: "Munnar Trip 2024",
+      status: "you owe ₹300",
+      image: "https://picsum.photos/200"
+    },
+    {
+      id: 11,
+      name: "Munnar Trip 2024",
+      status: "Settled Up",
+      image: "https://picsum.photos/300"
+    },
+    {
+      id: 12,
+      name: "Goa Trip 2024",
+      status: "Settled Up",
+      image: "https://picsum.photos/400"
+    }
+  ]
+
+  const router = useRouter();
+
+  const settleUp = () => {
+    console.log("Settle Up");
+  }
+
+  const balance = () => {
+    console.log("Balance");
+  }
+
+  const viewDetails = () => {
+    console.log("View Details");
+  }
+
+
+
   return (
     <>
       {/* Header */}
       <DashboardHeader />
       {/* Balance Card */}
-      <Card className="my-4 p-4 rounded-2xl bg-muted dark:bg-muted">
-        <div className="flex justify-between items-center">
-          <p className="text-xs font-light text-gray-400 ">Total Owed</p>
-          <p className="text-xs font-light text-gray-400">Total Owe</p>
-        </div>
-        <div className="flex justify-between items-center my-2">
-          <p className="text-lg font-light text-primary ">+₹15,092.86 </p>
-          <p className="text-lg font-light text-secondary-foreground">
-            -₹5,580.54
-          </p>
-        </div>
-        <Progress value={57} />
-        <div className="flex justify-between items-center mt-8 flex-wrap gap-y-4">
-          <Button className="h-8 rounded-xl bg-secondary text-white dark:text-white dark:bg-secondary">
-            Settle Up
-          </Button>
-          <Button
-            variant="outline"
-            className="h-8 rounded-xl bg-transperent dark:bg-transparent text-secondary dark:text-secondary border-secondary dark:border-secondary">
-            View Details
-          </Button>
-          <Button
-            variant="outline"
-            className="h-8 rounded-xl bg-transperent dark:bg-transparent text-secondary dark:text-secondary border-secondary dark:border-secondary">
-            Balance
-          </Button>
-        </div>
-      </Card>
+      <ExpenseDetailCard
+      settleUp={settleUp}
+      viewDetails={viewDetails}
+      balance={balance}
+      totalOwe={4434}
+      totalOwed={2353}
+      />
 
       {/* Groups */}
 
@@ -51,211 +124,27 @@ export default async function Dashboard() {
       </div>
 
       <div className="flex flex-col gap-4 mt-4">
-        <div className="flex justify-start gap-4 items-center">
-          <Avatar className="rounded-md h-16 w-16">
-            <AvatarImage src="https://picsum.photos/200" />
-            <AvatarFallback>CN</AvatarFallback>
-          </Avatar>
-          <div className="flex flex-col">
-            <p className="text-md mb-1">Munnar Trip 2024</p>
-            <p className="text-sm text-primary dark:text-primary-foreground">
-              Settled Up
-            </p>
+        {data.map((item) => (
+          <div className="flex justify-start gap-4 items-center cursor-pointer"
+          key={item.id}
+          onClick={() => 
+            router.push(`/group/${item.id}`)
+          }
+          >
+            <Avatar className="rounded-md h-16 w-16">
+              <AvatarImage src={item.image} />
+              <AvatarFallback>CN</AvatarFallback>
+            </Avatar>
+            <div className="flex flex-col">
+              <p className="text-md mb-1">{item.name}</p>
+              <p className="text-sm text-primary dark:text-primary-foreground">
+                {item.status}
+              </p>
+            </div>
           </div>
-        </div>
-        <div className="flex justify-start gap-4 items-center">
-          <Avatar className="rounded-md h-16 w-16">
-            <AvatarImage src="https://picsum.photos/300" />
-            <AvatarFallback>CN</AvatarFallback>
-          </Avatar>
-          <div className="flex flex-col">
-            <p className="text-md mb-1">Goa Trip 2024</p>
-            <p className="text-sm text-primary dark:text-primary-foreground">
-              Settled Up
-            </p>
-          </div>
-        </div>
-        <div className="flex justify-start gap-4 items-center">
-          <Avatar className="rounded-md h-16 w-16">
-            <AvatarImage src="https://picsum.photos/400" />
-            <AvatarFallback>CN</AvatarFallback>
-          </Avatar>
-          <div className="flex flex-col">
-            <p className="text-md mb-1">Sharavati Apartment</p>
-            <p className="text-sm text-secondary dark:text-secondary-foreground">
-              you owe ₹500
-            </p>
-          </div>
-        </div>
-        <div className="flex justify-start gap-4 items-center">
-          <Avatar className="rounded-md h-16 w-16">
-            <AvatarImage src="https://picsum.photos/300" />
-            <AvatarFallback>CN</AvatarFallback>
-          </Avatar>
-          <div className="flex flex-col">
-            <p className="text-md mb-1">Munnar Trip 2024</p>
-            <p className="text-sm text-primary dark:text-primary-foreground">
-              Settled Up
-            </p>
-          </div>
-        </div>
-        <div className="flex justify-start gap-4 items-center">
-          <Avatar className="rounded-md h-16 w-16">
-            <AvatarImage src="https://picsum.photos/100" />
-            <AvatarFallback>CN</AvatarFallback>
-          </Avatar>
-          <div className="flex flex-col">
-            <p className="text-md mb-1">Munnar Trip 2024</p>
-            <p className="text-sm text-secondary dark:text-secondary-foreground">
-              you owe ₹300
-            </p>
-          </div>
-        </div>
-        <div className="flex justify-start gap-4 items-center">
-          <Avatar className="rounded-md h-16 w-16">
-            <AvatarImage src="https://picsum.photos/200" />
-            <AvatarFallback>CN</AvatarFallback>
-          </Avatar>
-          <div className="flex flex-col">
-            <p className="text-md mb-1">Munnar Trip 2024</p>
-            <p className="text-sm text-primary dark:text-primary-foreground">
-              Settled Up
-            </p>
-          </div>
-        </div>
-        <div className="flex justify-start gap-4 items-center">
-          <Avatar className="rounded-md h-16 w-16">
-            <AvatarImage src="https://picsum.photos/300" />
-            <AvatarFallback>CN</AvatarFallback>
-          </Avatar>
-          <div className="flex flex-col">
-            <p className="text-md mb-1">Goa Trip 2024</p>
-            <p className="text-sm text-primary dark:text-primary-foreground">
-              Settled Up
-            </p>
-          </div>
-        </div>
-        <div className="flex justify-start gap-4 items-center">
-          <Avatar className="rounded-md h-16 w-16">
-            <AvatarImage src="https://picsum.photos/400" />
-            <AvatarFallback>CN</AvatarFallback>
-          </Avatar>
-          <div className="flex flex-col">
-            <p className="text-md mb-1">Sharavati Apartment</p>
-            <p className="text-sm text-secondary dark:text-secondary-foreground">
-              you owe ₹500
-            </p>
-          </div>
-        </div>
-        <div className="flex justify-start gap-4 items-center">
-          <Avatar className="rounded-md h-16 w-16">
-            <AvatarImage src="https://picsum.photos/300" />
-            <AvatarFallback>CN</AvatarFallback>
-          </Avatar>
-          <div className="flex flex-col">
-            <p className="text-md mb-1">Munnar Trip 2024</p>
-            <p className="text-sm text-primary dark:text-primary-foreground">
-              Settled Up
-            </p>
-          </div>
-        </div>
-        <div className="flex justify-start gap-4 items-center">
-          <Avatar className="rounded-md h-16 w-16">
-            <AvatarImage src="https://picsum.photos/100" />
-            <AvatarFallback>CN</AvatarFallback>
-          </Avatar>
-          <div className="flex flex-col">
-            <p className="text-md mb-1">Munnar Trip 2024</p>
-            <p className="text-sm text-secondary dark:text-secondary-foreground">
-              you owe ₹300
-            </p>
-          </div>
-        </div>
-        <div className="flex justify-start gap-4 items-center">
-          <Avatar className="rounded-md h-16 w-16">
-            <AvatarImage src="https://picsum.photos/200" />
-            <AvatarFallback>CN</AvatarFallback>
-          </Avatar>
-          <div className="flex flex-col">
-            <p className="text-md mb-1">Munnar Trip 2024</p>
-            <p className="text-sm text-primary dark:text-primary-foreground">
-              Settled Up
-            </p>
-          </div>
-        </div>
-        <div className="flex justify-start gap-4 items-center">
-          <Avatar className="rounded-md h-16 w-16">
-            <AvatarImage src="https://picsum.photos/300" />
-            <AvatarFallback>CN</AvatarFallback>
-          </Avatar>
-          <div className="flex flex-col">
-            <p className="text-md mb-1">Goa Trip 2024</p>
-            <p className="text-sm text-primary dark:text-primary-foreground">
-              Settled Up
-            </p>
-          </div>
-        </div>
-        <div className="flex justify-start gap-4 items-center">
-          <Avatar className="rounded-md h-16 w-16">
-            <AvatarImage src="https://picsum.photos/400" />
-            <AvatarFallback>CN</AvatarFallback>
-          </Avatar>
-          <div className="flex flex-col">
-            <p className="text-md mb-1">Sharavati Apartment</p>
-            <p className="text-sm text-secondary dark:text-secondary-foreground">
-              you owe ₹500
-            </p>
-          </div>
-        </div>
-        <div className="flex justify-start gap-4 items-center">
-          <Avatar className="rounded-md h-16 w-16">
-            <AvatarImage src="https://picsum.photos/300" />
-            <AvatarFallback>CN</AvatarFallback>
-          </Avatar>
-          <div className="flex flex-col">
-            <p className="text-md mb-1">Munnar Trip 2024</p>
-            <p className="text-sm text-primary dark:text-primary-foreground">
-              Settled Up
-            </p>
-          </div>
-        </div>
-        <div className="flex justify-start gap-4 items-center">
-          <Avatar className="rounded-md h-16 w-16">
-            <AvatarImage src="https://picsum.photos/100" />
-            <AvatarFallback>CN</AvatarFallback>
-          </Avatar>
-          <div className="flex flex-col">
-            <p className="text-md mb-1">Munnar Trip 2024</p>
-            <p className="text-sm text-secondary dark:text-secondary-foreground">
-              you owe ₹300
-            </p>
-          </div>
-        </div>
-        <div className="flex justify-start gap-4 items-center">
-          <Avatar className="rounded-md h-16 w-16">
-            <AvatarImage src="https://picsum.photos/200" />
-            <AvatarFallback>CN</AvatarFallback>
-          </Avatar>
-          <div className="flex flex-col">
-            <p className="text-md mb-1">Munnar Trip 2024</p>
-            <p className="text-sm text-primary dark:text-primary-foreground">
-              Settled Up
-            </p>
-          </div>
-        </div>
-        <div className="flex justify-start gap-4 items-center">
-          <Avatar className="rounded-md h-16 w-16">
-            <AvatarImage src="https://picsum.photos/300" />
-            <AvatarFallback>CN</AvatarFallback>
-          </Avatar>
-          <div className="flex flex-col">
-            <p className="text-md mb-1">Goa Trip 2024</p>
-            <p className="text-sm text-primary dark:text-primary-foreground">
-              Settled Up
-            </p>
-          </div>
-        </div>
+        ))}
       </div>
+
 
       {/* Filter Groups */}
     </>

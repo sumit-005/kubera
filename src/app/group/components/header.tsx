@@ -3,7 +3,7 @@ import React, { useState } from "react";
 import { SlidersHorizontalIcon, SearchIcon } from "lucide-react";
 import { BottomSheet } from "@/components/shared/bottom-sheet";
 
-const DashboardHeader = () => {
+const GroupHeader = () => {
   const [openFilter, setOpenFilter] = useState(false);
 
   const handleFilterButton = () => {
@@ -16,7 +16,7 @@ const DashboardHeader = () => {
     <>
       <div className="flex justify-between items-center mb-8 cursor-pointer">
         <SlidersHorizontalIcon onClick={handleFilterButton} />
-        <h1>Dashboard</h1>
+        <h1>Group</h1>
         <SearchIcon />
       </div>
       {openFilter && (
@@ -31,4 +31,4 @@ const DashboardHeader = () => {
   );
 };
 
-export default DashboardHeader;
+export default GroupHeader;
