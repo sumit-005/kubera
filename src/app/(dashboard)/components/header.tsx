@@ -24,7 +24,7 @@ const DashboardHeader = () => {
           open={openFilter}
           setOpen={handleFilterOpen}
           title="Filters"
-          children={<div>Filter</div>}
+          children={<>Filter</>}
         />
       )}
     </>
