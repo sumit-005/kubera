@@ -3,7 +3,6 @@ import { Poppins } from "next/font/google";
 import "./globals.css";
 import { Toaster } from "@/components/ui/toaster";
 import Providers from "@/providers/providers";
-import ThemeToggle from "@/components/layout/ThemeToggle/theme-toggle";
 
 const poppins = Poppins({
   weight: ["300", "400", "500", "600", "700"], // Specify the weights you need
@@ -33,7 +32,6 @@ export default function RootLayout({
       <body className="bg-background text-foreground">
         <Providers>
           <Toaster />
-          <ThemeToggle />
           <main className="min-h-screen p-4 lg:w-1/2 lg:mx-auto">
             {children}
           </main>
