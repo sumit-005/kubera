@@ -1,4 +1,4 @@
-'use client';
+"use client";
 import { useRouter } from "next/navigation";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Button } from "@/components/ui/button";
@@ -6,98 +6,95 @@ import { Button } from "@/components/ui/button";
 import DashboardHeader from "./components/header";
 import ExpenseDetailCard from "@/components/shared/expense-details-card";
 
-export default async function Dashboard() {
-
+export default function Dashboard() {
   const data = [
     {
       id: 1,
       name: "Munnar Trip 2024",
       status: "Settled Up",
-      image: "https://picsum.photos/200"
+      image: "https://picsum.photos/200",
     },
     {
       id: 2,
       name: "Goa Trip 2024",
       status: "Settled Up",
-      image: "https://picsum.photos/300"
+      image: "https://picsum.photos/300",
     },
     {
       id: 3,
       name: "Sharavati Apartment",
       status: "you owe ₹500",
-      image: "https://picsum.photos/400"
+      image: "https://picsum.photos/400",
     },
     {
       id: 4,
       name: "Munnar Trip 2024",
       status: "Settled Up",
-      image: "https://picsum.photos/300"
+      image: "https://picsum.photos/300",
     },
     {
       id: 5,
       name: "Munnar Trip 2024",
       status: "you owe ₹300",
-      image: "https://picsum.photos/100"
+      image: "https://picsum.photos/100",
     },
     {
       id: 6,
       name: "Munnar Trip 2024",
       status: "Settled Up",
-      image: "https://picsum.photos/200"
+      image: "https://picsum.photos/200",
     },
     {
       id: 7,
       name: "Goa Trip 2024",
       status: "Settled Up",
-      image: "https://picsum.photos/300"
+      image: "https://picsum.photos/300",
     },
     {
       id: 8,
       name: "Sharavati Apartment",
       status: "you owe ₹500",
-      image: "https://picsum.photos/400"
+      image: "https://picsum.photos/400",
     },
     {
       id: 9,
       name: "Munnar Trip 2024",
       status: "Settled Up",
-      image: "https://picsum.photos/300"
+      image: "https://picsum.photos/300",
     },
     {
       id: 10,
       name: "Munnar Trip 2024",
       status: "you owe ₹300",
-      image: "https://picsum.photos/200"
+      image: "https://picsum.photos/200",
     },
     {
       id: 11,
       name: "Munnar Trip 2024",
       status: "Settled Up",
-      image: "https://picsum.photos/300"
+      image: "https://picsum.photos/300",
     },
     {
       id: 12,
       name: "Goa Trip 2024",
       status: "Settled Up",
-      image: "https://picsum.photos/400"
-    }
-  ]
+      image: "https://picsum.photos/400",
+    },
+  ];
 
   const router = useRouter();
 
   const settleUp = () => {
     console.log("Settle Up");
-  }
+  };
 
   const balance = () => {
     console.log("Balance");
-  }
+  };
 
   const viewDetails = () => {
     console.log("View Details");
-  }
-
-
+  };
 
   return (
     <>
@@ -105,11 +102,11 @@ export default async function Dashboard() {
       <DashboardHeader />
       {/* Balance Card */}
       <ExpenseDetailCard
-      settleUp={settleUp}
-      viewDetails={viewDetails}
-      balance={balance}
-      totalOwe={4434}
-      totalOwed={2353}
+        settleUp={settleUp}
+        viewDetails={viewDetails}
+        balance={balance}
+        totalOwe={4434}
+        totalOwed={2353}
       />
 
       {/* Groups */}
@@ -125,12 +122,10 @@ export default async function Dashboard() {
 
       <div className="flex flex-col gap-4 mt-4">
         {data.map((item) => (
-          <div className="flex justify-start gap-4 items-center cursor-pointer"
-          key={item.id}
-          onClick={() => 
-            router.push(`/group/${item.id}`)
-          }
-          >
+          <div
+            className="flex justify-start gap-4 items-center cursor-pointer"
+            key={item.id}
+            onClick={() => router.push(`/group/${item.id}`)}>
             <Avatar className="rounded-md h-16 w-16">
               <AvatarImage src={item.image} />
               <AvatarFallback>CN</AvatarFallback>
@@ -144,7 +139,6 @@ export default async function Dashboard() {
           </div>
         ))}
       </div>
-
 
       {/* Filter Groups */}
     </>

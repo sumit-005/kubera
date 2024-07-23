@@ -1,8 +1,8 @@
-import type { Metadata } from "next";
 import { Poppins } from "next/font/google";
 import "./globals.css";
 import { Toaster } from "@/components/ui/toaster";
 import Providers from "@/providers/providers";
+import BottomBar from "@/components/layout/BottomBar/bottom-bar";
 
 const poppins = Poppins({
   weight: ["300", "400", "500", "600", "700"], // Specify the weights you need
@@ -35,6 +35,7 @@ export default function RootLayout({
           <main className="min-h-screen p-4 lg:w-1/2 lg:mx-auto">
             {children}
           </main>
+          <BottomBar />
         </Providers>
       </body>
     </html>

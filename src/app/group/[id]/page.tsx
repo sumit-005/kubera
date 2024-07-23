@@ -52,7 +52,6 @@ const Group = () => {
       date: "May, 06",
     },
     // add more random data, use the above objects as reference
-    
   ];
   return (
     <>
