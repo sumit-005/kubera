@@ -5,6 +5,9 @@ import { Button } from "@/components/ui/button";
 
 import DashboardHeader from "./components/header";
 import ExpenseDetailCard from "@/components/shared/expense-details-card";
+import { useEffect, useState } from "react";
+import { createClient } from "@/utils/supabase/client";
+import { Group } from "@/types/groups";
 
 export default function Dashboard() {
   const data = [
@@ -96,6 +99,24 @@ export default function Dashboard() {
     console.log("View Details");
   };
 
+  const [groups, setGroups] = useState<Group[]>([]);
+
+  const getTasks = async () => {
+    const supabase = createClient();
+
+    const { data: groups, error } = await supabase.from("groups").select("*");
+    if (error) {
+      console.error("Error fetching data:", error.message);
+    }
+    if (groups) {
+      setGroups(groups);
+    }
+  };
+
+  useEffect(() => {
+    getTasks();
+  }, []);
+
   return (
     <>
       {/* Header */}
@@ -121,19 +142,24 @@ export default function Dashboard() {
       </div>
 
       <div className="flex flex-col gap-4 mt-4">
-        {data.map((item) => (
+        {groups?.map((item: Group) => (
           <div
             className="flex justify-start gap-4 items-center cursor-pointer"
             key={item.id}
             onClick={() => router.push(`/group/${item.id}`)}>
             <Avatar className="rounded-md h-16 w-16">
-              <AvatarImage src={item.image} />
-              <AvatarFallback>CN</AvatarFallback>
+              <AvatarImage src={item.avatar} />
+              <AvatarFallback>
+                <p>
+                  {item.name[0]}
+                  {item.name.split(" ")[1] ? item.name.split(" ")[1][0] : ""}
+                </p>
+              </AvatarFallback>
             </Avatar>
             <div className="flex flex-col">
               <p className="text-md mb-1">{item.name}</p>
               <p className="text-sm text-primary dark:text-primary-foreground">
-                {item.status}
+                Settled Up
               </p>
             </div>
           </div>
