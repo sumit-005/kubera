@@ -49,9 +49,7 @@ export default function Dashboard() {
     const fileName = `${Date.now()}-${groupForm.avatar.name}`;
     if (groupForm.avatar) {
       compressImage(groupForm.avatar).then(async (result: any) => {
-        await supabase.storage
-          .from("avatars")
-          .upload(fileName, groupForm.avatar);
+        await supabase.storage.from("avatars").upload(fileName, result);
         const { data } = await supabase
           .from("groups")
           .insert([
