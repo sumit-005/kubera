@@ -5,24 +5,24 @@ import { useParams } from "next/navigation";
 import ExpenseDetailCard from "@/components/shared/expense-details-card";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Badge } from "@/components/ui/badge";
-import { getCurrency } from "@/utils/curreny";
 import { Button } from "@/components/ui/button";
 import { ChevronDown } from "lucide-react";
+import { getCurrency } from "@/utils/curreny";
 
 const Group = () => {
   const params = useParams();
   const id = params.id;
 
   const settleUp = () => {
-    console.log("Settle Up");
+    // console.log("Settle Up");
   };
 
   const balance = () => {
-    console.log("Balance");
+    // console.log("Balance");
   };
 
   const viewDetails = () => {
-    console.log("View Details");
+    // console.log("View Details");
   };
 
   const friends = [

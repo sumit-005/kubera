@@ -16,7 +16,7 @@ const DashboardHeader = () => {
     <>
       <div className="flex justify-between items-center mb-8 cursor-pointer">
         <SlidersHorizontalIcon onClick={handleFilterButton} />
-        <h1>Dashboard</h1>
+        <h1>Kubera</h1>
         <SearchIcon />
       </div>
       {openFilter && (

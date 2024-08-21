@@ -12,15 +12,15 @@ const Group = () => {
   const id = params.id;
 
   const settleUp = () => {
-    console.log("Settle Up");
+    // console.log("Settle Up");
   };
 
   const balance = () => {
-    console.log("Balance");
+    // console.log("Balance");
   };
 
   const viewDetails = () => {
-    console.log("View Details");
+    // console.log("View Details");
   };
 
   const expenses = [

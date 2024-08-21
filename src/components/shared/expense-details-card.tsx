@@ -2,8 +2,8 @@ import React from "react";
 import { Card } from "@/components/ui/card";
 import { Progress } from "@/components/ui/progress";
 import { Button } from "@/components/ui/button";
-import { getCurrency } from "@/utils/curreny";
 import { Avatar, AvatarFallback, AvatarImage } from "../ui/avatar";
+import { getCurrency } from "@/utils/curreny";
 
 export type ExpenseDetailCardProps = {
   totalOwed: number;

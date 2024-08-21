@@ -6,104 +6,36 @@ import { Button } from "@/components/ui/button";
 import DashboardHeader from "./components/header";
 import ExpenseDetailCard from "@/components/shared/expense-details-card";
 import { useEffect, useState } from "react";
-import { createClient } from "@/utils/supabase/client";
 import { Group } from "@/types/groups";
+import useSupabaseBrowser from "@/utils/supabase-browser";
+import AddGroup from "./components/add-group";
+import { compressImage } from "@/utils/compressImage";
 
 export default function Dashboard() {
-  const data = [
-    {
-      id: 1,
-      name: "Munnar Trip 2024",
-      status: "Settled Up",
-      image: "https://picsum.photos/200",
-    },
-    {
-      id: 2,
-      name: "Goa Trip 2024",
-      status: "Settled Up",
-      image: "https://picsum.photos/300",
-    },
-    {
-      id: 3,
-      name: "Sharavati Apartment",
-      status: "you owe ₹500",
-      image: "https://picsum.photos/400",
-    },
-    {
-      id: 4,
-      name: "Munnar Trip 2024",
-      status: "Settled Up",
-      image: "https://picsum.photos/300",
-    },
-    {
-      id: 5,
-      name: "Munnar Trip 2024",
-      status: "you owe ₹300",
-      image: "https://picsum.photos/100",
-    },
-    {
-      id: 6,
-      name: "Munnar Trip 2024",
-      status: "Settled Up",
-      image: "https://picsum.photos/200",
-    },
-    {
-      id: 7,
-      name: "Goa Trip 2024",
-      status: "Settled Up",
-      image: "https://picsum.photos/300",
-    },
-    {
-      id: 8,
-      name: "Sharavati Apartment",
-      status: "you owe ₹500",
-      image: "https://picsum.photos/400",
-    },
-    {
-      id: 9,
-      name: "Munnar Trip 2024",
-      status: "Settled Up",
-      image: "https://picsum.photos/300",
-    },
-    {
-      id: 10,
-      name: "Munnar Trip 2024",
-      status: "you owe ₹300",
-      image: "https://picsum.photos/200",
-    },
-    {
-      id: 11,
-      name: "Munnar Trip 2024",
-      status: "Settled Up",
-      image: "https://picsum.photos/300",
-    },
-    {
-      id: 12,
-      name: "Goa Trip 2024",
-      status: "Settled Up",
-      image: "https://picsum.photos/400",
-    },
-  ];
+  const [openGroup, setOpenGroup] = useState(false);
+  const supabase = useSupabaseBrowser();
+  const [groupForm, setGroupForm] = useState<any>({
+    name: "",
+    avatar: null,
+  });
 
   const router = useRouter();
 
   const settleUp = () => {
-    console.log("Settle Up");
+    // console.log("Settle Up");
   };
 
   const balance = () => {
-    console.log("Balance");
+    // console.log("Balance");
   };
 
   const viewDetails = () => {
-    console.log("View Details");
+    // console.log("View Details");
   };
 
   const [groups, setGroups] = useState<Group[]>([]);
 
   const getTasks = async () => {
-    const supabase = createClient();
-
     const { data: groups, error } = await supabase.from("groups").select("*");
     if (error) {
       console.error("Error fetching data:", error.message);
@@ -111,6 +43,50 @@ export default function Dashboard() {
     if (groups) {
       setGroups(groups);
     }
+  };
+  const handleAddGroup = async () => {
+    let fileuploadSuccess = false;
+    const fileName = `${Date.now()}-${groupForm.avatar.name}`;
+    if (groupForm.avatar) {
+      compressImage(groupForm.avatar).then(async (result: any) => {
+        await supabase.storage
+          .from("avatars")
+          .upload(fileName, groupForm.avatar);
+        const { data } = await supabase
+          .from("groups")
+          .insert([
+            {
+              name: groupForm.name,
+              avatar: `${
+                process.env.NEXT_PUBLIC_SUPABASE_URL
+              }/storage/v1/object/public/avatars/${fileName}`,
+            },
+          ])
+          .select();
+        if (data) {
+          setOpenGroup(false);
+          setGroupForm({ name: "", avatar: "" });
+          getTasks();
+        }
+      });
+    } else {
+      const { data } = await supabase
+        .from("groups")
+        .insert([
+          {
+            name: groupForm.name,
+          },
+        ])
+        .select();
+      if (data) {
+        setOpenGroup(false);
+        setGroupForm({ name: "", avatar: "" });
+        getTasks();
+      }
+    }
+    // if (error) {
+    //   console.error("Error inserting data:", error.message);
+    // }
   };
 
   useEffect(() => {
@@ -136,12 +112,13 @@ export default function Dashboard() {
         <h2 className="text-lg">Groups</h2>
         <Button
           variant="outline"
-          className="h-8 rounded-lg bg-transparent  text-primary dark:text-primary dark:bg-transparent border-primary dark:border-primary">
+          className="h-8 rounded-lg bg-transparent  text-primary dark:text-primary dark:bg-transparent border-primary dark:border-primary"
+          onClick={() => setOpenGroup(true)}>
           Add +
         </Button>
       </div>
 
-      <div className="flex flex-col gap-4 mt-4">
+      <div className="flex flex-col gap-4 mt-4 mb-28">
         {groups?.map((item: Group) => (
           <div
             className="flex justify-start gap-4 items-center cursor-pointer"
@@ -165,6 +142,14 @@ export default function Dashboard() {
           </div>
         ))}
       </div>
+
+      <AddGroup
+        open={openGroup}
+        setOpen={setOpenGroup}
+        setGroupForm={setGroupForm}
+        handleAddGroup={handleAddGroup}
+        groupForm={groupForm}
+      />
 
       {/* Filter Groups */}
     </>
