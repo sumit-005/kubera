@@ -76,7 +76,7 @@ const AddGroup = ({
                 </label>
               </div>
               <div className="grid w-full max-w-sm items-center gap-1.5">
-                <Label htmlFor="groupName">Group Name</Label>
+                <Label htmlFor="groupName">Group Name </Label>
                 <Input
                   type="groupName"
                   id="groupName"
